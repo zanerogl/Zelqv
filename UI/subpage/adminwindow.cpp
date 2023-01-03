@@ -74,5 +74,5 @@ void AdminWindow::loadUserData()
 void AdminWindow::addUserData()
 {
     m_tableModel->setRowCount(m_tableModel->rowCount()+1);
-    m_tableModel->setData(m_tableModel->index(m_tableModel->rowCount(),1), "123");
+//    m_tableModel->setData(m_tableModel->index(m_tableModel->rowCount()-1,1), "948484");
 }

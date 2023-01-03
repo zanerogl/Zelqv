@@ -32,32 +32,34 @@ void LoginWindow::timerEvent(QTimerEvent *event)
 
 bool LoginWindow::eventFilter(QObject *watched, QEvent *event)
 {
-    if(watched == this && event->type() == QEvent::MouseButtonPress)
-    {
-        this->setFocus();
-        if(m_keyboard->state())
-        {
-            m_keyboard->popIn(0, this->height()/3);
-        }
-    }
-    else if(watched == ui->userNameLineEdit && event->type() == QEvent::MouseButtonPress)
-    {
-        ui->userNameLineEdit->setFocus();
-        if(!m_keyboard->state())
-        {
-            m_keyboard->popUp(0, this->height()/3);
-        }
-    }
-    else if (watched == ui->passwordLineEdit && event->type() == QEvent::MouseButtonPress)
-    {
-        ui->passwordLineEdit->setFocus();
-        if(!m_keyboard->state())    //隐藏->弹出
-        {
-            m_keyboard->popUp(0, this->height()/3);
-        }
-    }
+    Q_UNUSED(watched)
+    Q_UNUSED(event)
+//    if(watched == this && event->type() == QEvent::MouseButtonPress)
+//    {
+//        this->setFocus();
+//        if(m_keyboard->state())
+//        {
+//            m_keyboard->popIn(0, this->height()/3);
+//        }
+//    }
+//    else if(watched == ui->userNameLineEdit && event->type() == QEvent::MouseButtonPress)
+//    {
+//        ui->userNameLineEdit->setFocus();
+//        if(!m_keyboard->state())
+//        {
+//            m_keyboard->popUp(0, this->height()/3);
+//        }
+//    }
+//    else if (watched == ui->passwordLineEdit && event->type() == QEvent::MouseButtonPress)
+//    {
+//        ui->passwordLineEdit->setFocus();
+//        if(!m_keyboard->state())    //隐藏->弹出
+//        {
+//            m_keyboard->popUp(0, this->height()/3);
+//        }
+//    }
 
-    return QWidget::eventFilter(watched, event);
+//    return QWidget::eventFilter(watched, event);
 }
 
 void LoginWindow::init()
@@ -65,22 +67,22 @@ void LoginWindow::init()
     m_parentWidget = new QWidget;
     m_parentWidget = parentWidget();
 
-    this->installEventFilter(this);
-
     QRegExp regx("[a-zA-Z0-9]+$");
 
     QValidator *validator0 = new QRegExpValidator(regx, ui->userNameLineEdit);
     ui->userNameLineEdit->setValidator(validator0);
     ui->userNameLineEdit->setMaxLength(15);
-    ui->userNameLineEdit->installEventFilter(this);
 
     QValidator *validator1 = new QRegExpValidator(regx, ui->passwordLineEdit);
     ui->passwordLineEdit->setValidator(validator1);
     ui->passwordLineEdit->setMaxLength(15);
-    ui->passwordLineEdit->installEventFilter(this);
 
-    m_keyboard = new Keyboard(this);
+//    m_keyboard = new Keyboard(this);
 
     m_pWTimerID = startTimer(20);
     m_leTimerID = startTimer(100);
+
+    this->installEventFilter(m_parentWidget);
+    ui->userNameLineEdit->installEventFilter(m_parentWidget);
+    ui->passwordLineEdit->installEventFilter(m_parentWidget);
 }

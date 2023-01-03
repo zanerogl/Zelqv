@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "UI/subpage/subpage.h"
+#include "UI/zwidget/keyboard/keyboard.h"
+#include <QValidator>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,6 +18,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    virtual bool eventFilter(QObject *watched, QEvent *event);
+
 private:
     void initUI();
 
@@ -26,5 +31,6 @@ private:
     LoginWindow *m_lgW;
     AdminWindow *m_adW;
 
+    Keyboard *m_keyboard;
 };
 #endif // MAINWINDOW_H

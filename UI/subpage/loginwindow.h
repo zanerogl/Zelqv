@@ -19,6 +19,7 @@ public:
     explicit LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();
 
+    Ui::LoginWindow *ui;
     bool m_state = false;
 
 protected:
@@ -40,14 +41,14 @@ private:
     void init();
 
 private:
-    Ui::LoginWindow *ui;
+
 
     QWidget *m_parentWidget = nullptr;
 
     int m_pWTimerID = -1;
     int m_leTimerID = -1;
 
-    Keyboard *m_keyboard;
+//    Keyboard *m_keyboard;
 };
 
 #endif // LOGINWINDOW_H
