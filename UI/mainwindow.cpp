@@ -49,7 +49,11 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 void MainWindow::initUI()
 {
     m_lgW = new LoginWindow(this);
-//    m_adW = new AdminWindow(this);
+    m_adW = new AdminWindow(this);
+
+    m_adW->move(50,0);
+
+
 
     m_keyboard = new Keyboard(this);
 }
